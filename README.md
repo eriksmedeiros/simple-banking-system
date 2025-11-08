@@ -99,7 +99,7 @@ git pull origin main
 Crie uma nova branch de funcionalidade (feature) a partir da main:
 
 ```bash
-git checkout -b feature/nome-da-sua-tarefa
+git checkout -b nome-da-sua-tarefa
 ```
 
 Após concluir suas alterações e testar, faça o commit e envie sua branch para o repositório remoto:
@@ -107,7 +107,7 @@ Após concluir suas alterações e testar, faça o commit e envie sua branch par
 ```bash
 git add .
 git commit -m "feat: descreva sua alteração"
-git push origin feature/nome-da-sua-tarefa
+git push origin nome-da-sua-tarefa
 ```
 
 Abra um **Pull Request (PR)** da sua branch para a branch **main**.
