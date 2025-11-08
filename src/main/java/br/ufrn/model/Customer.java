@@ -7,13 +7,11 @@ public class Customer {
     private Long Id;
     private String name;
     private String cpf;
-    private LocalDate birthDate;
 
-    public Customer(String name, String cpf, String email, LocalDate birthDate) {
+    public Customer(String name, String cpf) {
         this.Id = generateId();
         this.name = name;
         this.cpf = cpf;
-        this.birthDate = birthDate;
     }
 
     public Long getId() {
@@ -40,24 +38,13 @@ public class Customer {
         this.cpf = cpf;
     }
 
-    public LocalDate getbirthDate() {
-        return birthDate;
-    }
-
-    public void setbirthDate(LocalDate birthDate) {
-        this.birthDate = birthDate;
-    }
-
     public Long generateId() {
         return ++idCounter;
     }
 
     @Override
     public String toString() {
-        return "Cliente{" +
-                "Nome ='" + name + '\'' +
-                ", CPF='" + cpf + '\'' +
-                ", Data de Nascimento=" + birthDate +
-                '}';
+        return  "Nome ='" + name + '\'' +
+                ", CPF='" + cpf + '\'';
     }
 }
