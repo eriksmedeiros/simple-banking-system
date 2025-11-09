@@ -59,6 +59,35 @@ public class AccountService {
         accountRepository.withdraw(accountNumber, amount);
     }
 
+    public void transfer(String fromAccountNumber, String toAccountNumber, double amount) {
+        if (fromAccountNumber == null || toAccountNumber == null) {
+            throw new IllegalArgumentException("Números de conta não podem ser nulos.");
+        }
+        if (fromAccountNumber.equals(toAccountNumber)) {
+            throw new IllegalArgumentException("Conta de origem e destino devem ser diferentes.");
+        }
+        if (amount <= 0) {
+            throw new IllegalArgumentException("Valor para transferência deve ser positivo.");
+        }
+
+        Account fromAccount = accountRepository.findByAccountNumber(fromAccountNumber);
+        if (fromAccount == null) {
+            throw new AccountNotFoundException("Conta de origem não encontrada: " + fromAccountNumber);
+        }
+
+        Account toAccount = accountRepository.findByAccountNumber(toAccountNumber);
+        if (toAccount == null) {
+            throw new AccountNotFoundException("Conta de destino não encontrada: " + toAccountNumber);
+        }
+
+        if (fromAccount.getBalance() < amount) {
+            throw new InsufficientFundsException("Saldo insuficiente para transferência.");
+        }
+
+        accountRepository.withdraw(fromAccountNumber, amount);
+        accountRepository.addBalance(toAccountNumber, amount);
+    }
+
     public ArrayList<Account> findAllOrdenedByBalanceDesc() {
         return accountRepository.findAllOrdenedByBalanceDesc();
     }

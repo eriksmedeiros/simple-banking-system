@@ -64,6 +64,26 @@ public class ViewAccount {
         }
     }
 
+    protected void transfer() {
+        try {
+            System.out.println("Número da conta de origem: ");
+            String fromAccount = scanner.nextLine();
+
+            System.out.println("Número da conta de destino: ");
+            String toAccount = scanner.nextLine();
+
+            System.out.println("Valor para transferência: ");
+            double amount = Double.parseDouble(scanner.nextLine());
+
+            accountService.transfer(fromAccount, toAccount, amount);
+            System.out.println("Transferência realizada com sucesso.");
+        } catch (AccountNotFoundException | IllegalArgumentException | InsufficientFundsException e) {
+            System.out.println("Operação inválida: " + e.getMessage());
+        } catch (Exception e) {
+            System.out.println("Erro inesperado: " + e.getMessage());
+        }
+    }
+
     protected void listAllAccounts() {
         System.out.println("Lista de Contas (ordenadas por saldo - decrescente):");
         for (Account acc : accountService.findAllOrdenedByBalanceDesc()) {

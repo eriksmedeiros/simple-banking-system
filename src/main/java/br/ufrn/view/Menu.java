@@ -15,15 +15,12 @@ public class Menu {
     private final ViewAccount viewAccount;
 
     public Menu() {
-        // criar implementações concretas dos repositórios
         ICustomerRepository customerRepository = new CustomerRepositoryImpls();
         IAccountRepository accountRepository = new AccountRepositoryImpls();
 
-        // criar services injetando as interfaces (inversão de dependência)
         CustomerService customerService = new CustomerService(customerRepository);
         AccountService accountService = new AccountService(accountRepository, customerRepository);
 
-        // criar views injetando os services
         this.viewCustomer = new ViewCustomer(customerService);
         this.viewAccount = new ViewAccount(accountService);
     }
@@ -38,7 +35,8 @@ public class Menu {
             System.out.println("4. Depositar");
             System.out.println("5. Sacar");
             System.out.println("6. Listar todas as contas");
-            System.out.println("7. Sair");
+            System.out.println("7. Transferir entre contas");
+            System.out.println("8. Sair");
             System.out.print("Escolha uma opção: ");
             int option = scanner.nextInt();
             scanner.nextLine();
@@ -50,7 +48,8 @@ public class Menu {
                 case 4 -> viewAccount.deposit();
                 case 5 -> viewAccount.withdraw();
                 case 6 -> viewAccount.listAllAccounts();
-                case 7 -> {
+                case 7 -> viewAccount.transfer();
+                case 8 -> {
                     System.out.println("Encerrando sistema...");
                     running = false;
                 }
