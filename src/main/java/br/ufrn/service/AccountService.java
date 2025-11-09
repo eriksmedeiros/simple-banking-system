@@ -147,4 +147,17 @@ public class AccountService {
 
         return sb.toString();
     }
+
+    public double getBalance(String accountNumber) {
+        if (accountNumber == null || accountNumber.isBlank()) {
+            throw new IllegalArgumentException("Número da conta inválido.");
+        }
+
+        Account account = accountRepository.findByAccountNumber(accountNumber);
+        if (account == null) {
+            throw new AccountNotFoundException("Conta não encontrada: " + accountNumber);
+        }
+
+        return account.getBalance();
+    }
 }

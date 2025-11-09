@@ -115,4 +115,18 @@ public class ViewAccount {
                     + " | Saldo: " + acc.getBalance());
         }
     }
+
+    protected void checkBalance() {
+        try {
+            System.out.println("Número da conta para consulta de saldo: ");
+            String accountNumber = scanner.nextLine();
+
+            double balance = accountService.getBalance(accountNumber);
+            System.out.println("Saldo atual da conta " + accountNumber + ": " + String.format("%.2f", balance));
+        } catch (AccountNotFoundException | IllegalArgumentException e) {
+            System.out.println("Operação inválida: " + e.getMessage());
+        } catch (Exception e) {
+            System.out.println("Erro inesperado: " + e.getMessage());
+        }
+    }
 }

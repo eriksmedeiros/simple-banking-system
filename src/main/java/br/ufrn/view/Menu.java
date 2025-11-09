@@ -35,9 +35,10 @@ public class Menu {
             System.out.println("4. Depositar");
             System.out.println("5. Sacar");
             System.out.println("6. Listar todas as contas");
-            System.out.println("7. Transferir entre contas");
-            System.out.println("8. Aplicar rendimento nas poupanças");
-            System.out.println("9. Relatório de consolidação");
+            System.out.println("7. Consultar saldo");
+            System.out.println("8. Transferir entre contas");
+            System.out.println("9. Aplicar rendimento nas poupanças");
+            System.out.println("10. Relatório de consolidação");
             System.out.println("0. Sair");
             System.out.print("Escolha uma opção: ");
             int option = scanner.nextInt();
@@ -50,9 +51,10 @@ public class Menu {
                 case 4 -> viewAccount.deposit();
                 case 5 -> viewAccount.withdraw();
                 case 6 -> viewAccount.listAllAccounts();
-                case 7 -> viewAccount.transfer();
-                case 8 -> viewAccount.applyInterest();
-                case 9 -> viewAccount.consolidationReport();
+                case 7 -> viewAccount.checkBalance();
+                case 8 -> viewAccount.transfer();
+                case 9 -> viewAccount.applyInterest();
+                case 10 -> viewAccount.consolidationReport();
                 case 0 -> {
                     System.out.println("Encerrando sistema...");
                     running = false;
