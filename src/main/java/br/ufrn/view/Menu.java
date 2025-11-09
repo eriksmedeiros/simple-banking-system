@@ -2,14 +2,30 @@ package br.ufrn.view;
 
 import java.util.Scanner;
 
+import br.ufrn.repository.AccountRepositoryImpls;
+import br.ufrn.repository.CustomerRepositoryImpls;
+import br.ufrn.repository.IAccountRepository;
+import br.ufrn.repository.ICustomerRepository;
+import br.ufrn.service.AccountService;
+import br.ufrn.service.CustomerService;
+
 public class Menu {
     private final Scanner scanner = new Scanner(System.in);
     private final ViewCustomer viewCustomer;
     private final ViewAccount viewAccount;
 
     public Menu() {
-        this.viewCustomer = new ViewCustomer();
-        this.viewAccount = new ViewAccount();
+        // criar implementações concretas dos repositórios
+        ICustomerRepository customerRepository = new CustomerRepositoryImpls();
+        IAccountRepository accountRepository = new AccountRepositoryImpls();
+
+        // criar services injetando as interfaces (inversão de dependência)
+        CustomerService customerService = new CustomerService(customerRepository);
+        AccountService accountService = new AccountService(accountRepository, customerRepository);
+
+        // criar views injetando os services
+        this.viewCustomer = new ViewCustomer(customerService);
+        this.viewAccount = new ViewAccount(accountService);
     }
 
     public void displayMainMenu() {

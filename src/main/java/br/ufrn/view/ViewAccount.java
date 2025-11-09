@@ -11,8 +11,8 @@ public class ViewAccount {
     private final Scanner scanner = new Scanner(System.in);
     private final AccountService accountService;
 
-    public ViewAccount() {
-        this.accountService = new AccountService();
+    public ViewAccount(AccountService accountService) {
+        this.accountService = accountService;
     }
 
     protected void registerAccount() {

@@ -7,14 +7,14 @@ import java.util.ArrayList;
 import br.ufrn.exception.CustomerAlreadyExistsException;
 import br.ufrn.exception.InvalidCpfException;
 import br.ufrn.model.Customer;
-import br.ufrn.repository.CustomerRepository;
+import br.ufrn.repository.ICustomerRepository;
 
 public class CustomerService {
 
-    private final CustomerRepository customerRepository;
+    private final ICustomerRepository customerRepository;
 
-    public CustomerService() {
-        this.customerRepository = new CustomerRepository();
+    public CustomerService(ICustomerRepository customerRepository) {
+        this.customerRepository = customerRepository;
     }
 
     public void registerCustomer(Customer newCustomer) {

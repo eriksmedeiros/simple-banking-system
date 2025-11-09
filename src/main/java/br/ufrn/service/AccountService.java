@@ -6,16 +6,16 @@ import br.ufrn.exception.AccountNotFoundException;
 import br.ufrn.exception.InsufficientFundsException;
 import br.ufrn.model.Account;
 import br.ufrn.model.Customer;
-import br.ufrn.repository.AccountRepository;
-import br.ufrn.repository.CustomerRepository;
+import br.ufrn.repository.IAccountRepository;
+import br.ufrn.repository.ICustomerRepository;
 
 public class AccountService {
-    private final AccountRepository accountRepository;
-    private final CustomerRepository customerRepository;
+    private final IAccountRepository accountRepository;
+    private final ICustomerRepository customerRepository;
 
-    public AccountService() {
-        this.accountRepository = new AccountRepository();
-        this.customerRepository = new CustomerRepository();
+    public AccountService(IAccountRepository accountRepository, ICustomerRepository customerRepository) {
+        this.accountRepository = accountRepository;
+        this.customerRepository = customerRepository;
     }
 
     public String registerAccount(String cpf, String accountType) {

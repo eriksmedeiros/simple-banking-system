@@ -1,16 +1,16 @@
 package br.ufrn.view;
 
+import java.util.Scanner;
+
 import br.ufrn.model.Customer;
 import br.ufrn.service.CustomerService;
-
-import java.util.Scanner;
 
 public class ViewCustomer {
     private final Scanner scanner = new Scanner(System.in);
     private final CustomerService customerService;
 
-    public ViewCustomer() {
-        this.customerService = new CustomerService();
+    public ViewCustomer(CustomerService customerService) {
+        this.customerService = customerService;
     }
 
     protected void registerCustomer() {
