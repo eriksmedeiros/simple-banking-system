@@ -84,6 +84,20 @@ public class ViewAccount {
         }
     }
 
+    protected void applyInterest() {
+        try {
+            System.out.println("Percentual de rendimento a aplicar (ex.: 1.5 para 1.5%): ");
+            double percent = Double.parseDouble(scanner.nextLine());
+
+            accountService.applyInterestToSavings(percent);
+            System.out.println("Rendimento aplicado nas contas poupança com sucesso.");
+        } catch (IllegalArgumentException e) {
+            System.out.println("Operação inválida: " + e.getMessage());
+        } catch (Exception e) {
+            System.out.println("Erro inesperado: " + e.getMessage());
+        }
+    }
+
     protected void listAllAccounts() {
         System.out.println("Lista de Contas (ordenadas por saldo - decrescente):");
         for (Account acc : accountService.findAllOrdenedByBalanceDesc()) {
