@@ -91,4 +91,25 @@ public class AccountService {
     public ArrayList<Account> findAllOrdenedByBalanceDesc() {
         return accountRepository.findAllOrdenedByBalanceDesc();
     }
+
+    public void applyInterestToSavings(double percent) {
+        if (percent < 0) {
+            throw new IllegalArgumentException("Taxa de rendimento deve ser não-negativa.");
+        }
+
+        if (percent == 0) {
+            return;
+        }
+
+        ArrayList<Account> all = accountRepository.findAllOrdenedByBalanceDesc();
+        for (Account acc : all) {
+            String type = acc.getAccountType();
+            if (type != null && type.toLowerCase().equals("poupanca")) {
+                double interest = acc.getBalance() * percent / 100.0;
+                if (interest > 0) {
+                    accountRepository.addBalance(acc.getAccountNumber(), interest);
+                }
+            }
+        }
+    }
 }
