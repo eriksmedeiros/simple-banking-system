@@ -1,6 +1,8 @@
 package br.ufrn.service;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 import br.ufrn.exception.AccountNotFoundException;
 import br.ufrn.exception.InsufficientFundsException;
@@ -111,5 +113,38 @@ public class AccountService {
                 }
             }
         }
+    }
+
+    public String getConsolidationReport() {
+        ArrayList<Account> all = accountRepository.findAllOrdenedByBalanceDesc();
+
+        Map<String, Integer> counts = new HashMap<>();
+        Map<String, Double> sums = new HashMap<>();
+
+        for (Account acc : all) {
+            String type = acc.getAccountType() == null ? "Unknown" : acc.getAccountType();
+            counts.put(type, counts.getOrDefault(type, 0) + 1);
+            sums.put(type, sums.getOrDefault(type, 0.0) + acc.getBalance());
+        }
+
+        int totalAccounts = all.size();
+        double totalBalance = 0.0;
+        for (double v : sums.values()) {
+            totalBalance += v;
+        }
+
+        StringBuilder sb = new StringBuilder();
+        sb.append("Relatório de Consolidação:\n");
+        sb.append("Total de contas cadastradas: ").append(totalAccounts).append("\n\n");
+        sb.append("Saldos por tipo de conta:\n");
+        for (String type : counts.keySet()) {
+            sb.append("Tipo: ").append(type)
+                    .append(" | Quantidade: ").append(counts.get(type))
+                    .append(" | Saldo total: ").append(String.format("%.2f", sums.get(type)))
+                    .append("\n");
+        }
+        sb.append("\nSaldo total do banco: ").append(String.format("%.2f", totalBalance)).append("\n");
+
+        return sb.toString();
     }
 }

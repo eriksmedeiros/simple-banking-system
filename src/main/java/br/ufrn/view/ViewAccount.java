@@ -98,6 +98,15 @@ public class ViewAccount {
         }
     }
 
+    protected void consolidationReport() {
+        try {
+            String report = accountService.getConsolidationReport();
+            System.out.println(report);
+        } catch (Exception e) {
+            System.out.println("Erro ao gerar relatório: " + e.getMessage());
+        }
+    }
+
     protected void listAllAccounts() {
         System.out.println("Lista de Contas (ordenadas por saldo - decrescente):");
         for (Account acc : accountService.findAllOrdenedByBalanceDesc()) {

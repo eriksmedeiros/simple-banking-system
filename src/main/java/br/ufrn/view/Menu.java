@@ -37,7 +37,8 @@ public class Menu {
             System.out.println("6. Listar todas as contas");
             System.out.println("7. Transferir entre contas");
             System.out.println("8. Aplicar rendimento nas poupanças");
-            System.out.println("9. Sair");
+            System.out.println("9. Relatório de consolidação");
+            System.out.println("0. Sair");
             System.out.print("Escolha uma opção: ");
             int option = scanner.nextInt();
             scanner.nextLine();
@@ -51,7 +52,8 @@ public class Menu {
                 case 6 -> viewAccount.listAllAccounts();
                 case 7 -> viewAccount.transfer();
                 case 8 -> viewAccount.applyInterest();
-                case 9 -> {
+                case 9 -> viewAccount.consolidationReport();
+                case 0 -> {
                     System.out.println("Encerrando sistema...");
                     running = false;
                 }
