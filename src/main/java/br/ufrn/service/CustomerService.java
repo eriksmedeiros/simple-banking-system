@@ -1,13 +1,13 @@
 package br.ufrn.service;
 
+import static br.ufrn.utils.CpfValidator.cpfIsValid;
+
+import java.util.ArrayList;
+
 import br.ufrn.exception.CustomerAlreadyExistsException;
 import br.ufrn.exception.InvalidCpfException;
 import br.ufrn.model.Customer;
 import br.ufrn.repository.CustomerRepository;
-
-import java.util.ArrayList;
-
-import static br.ufrn.utils.CpfValidator.cpfIsValid;
 
 public class CustomerService {
 
@@ -35,5 +35,14 @@ public class CustomerService {
 
     public ArrayList<Customer> findAllCustomers() {
         return customerRepository.findAll();
+    }
+
+    public Customer findCustomerByCpf(String cpf) {
+        for (Customer customer : customerRepository.findAll()) {
+            if (customer.getCpf().equals(cpf)) {
+                return customer;
+            }
+        }
+        return null;
     }
 }

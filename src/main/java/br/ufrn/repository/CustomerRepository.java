@@ -1,19 +1,17 @@
 package br.ufrn.repository;
 
-import br.ufrn.model.Account;
-import br.ufrn.model.Customer;
-
 import java.util.ArrayList;
 
+import br.ufrn.model.Customer;
+
 public class CustomerRepository {
-    private final ArrayList<Customer> customerArrayList;
+    private static final ArrayList<Customer> customerArrayList = new ArrayList<>();
 
     public CustomerRepository() {
-        this.customerArrayList = new ArrayList<>();
     }
 
     public void save(Customer customer) {
-        this.customerArrayList.add(customer);
+        customerArrayList.add(customer);
     }
 
     public boolean customerExistsInDatabase(String cpf) {
@@ -27,5 +25,14 @@ public class CustomerRepository {
 
     public ArrayList<Customer> findAll() {
         return customerArrayList;
+    }
+
+    public Customer findCustomerByCpf(String cpf) {
+        for (Customer customer : customerArrayList) {
+            if (customer.getCpf().equals(cpf)) {
+                return customer;
+            }
+        }
+        return null;
     }
 }
