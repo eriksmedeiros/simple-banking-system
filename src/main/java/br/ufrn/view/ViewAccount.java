@@ -98,12 +98,35 @@ public class ViewAccount {
         }
     }
 
+    protected void consolidationReport() {
+        try {
+            String report = accountService.getConsolidationReport();
+            System.out.println(report);
+        } catch (Exception e) {
+            System.out.println("Erro ao gerar relatório: " + e.getMessage());
+        }
+    }
+
     protected void listAllAccounts() {
         System.out.println("Lista de Contas (ordenadas por saldo - decrescente):");
         for (Account acc : accountService.findAllOrdenedByBalanceDesc()) {
             System.out.println("Tipo: " + acc.getAccountType() + " | Nome: " + acc.getCustomer().getName()
                     + " | CPF: " + acc.getCustomer().getCpf() + " | Número: " + acc.getAccountNumber()
                     + " | Saldo: " + acc.getBalance());
+        }
+    }
+
+    protected void checkBalance() {
+        try {
+            System.out.println("Número da conta para consulta de saldo: ");
+            String accountNumber = scanner.nextLine();
+
+            double balance = accountService.getBalance(accountNumber);
+            System.out.println("Saldo atual da conta " + accountNumber + ": " + String.format("%.2f", balance));
+        } catch (AccountNotFoundException | IllegalArgumentException e) {
+            System.out.println("Operação inválida: " + e.getMessage());
+        } catch (Exception e) {
+            System.out.println("Erro inesperado: " + e.getMessage());
         }
     }
 }
