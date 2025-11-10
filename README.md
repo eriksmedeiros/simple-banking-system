@@ -33,7 +33,24 @@ A interação acontece por interface de linha de comando (CLI) que permite reali
 ## 🧩 Estrutura do Projeto
 
 ```
-a definir
+simple-banking-system/
+├── src/
+│   └── main/
+│       └── java/
+│           └── br/
+│               └── ufrn/
+│                   ├── exception/       
+│                   ├── model/           
+│                   ├── repository/      
+│                   ├── service/         
+│                   ├── utils/           
+│                   ├── view/            
+│                   └── Main.java        # Classe principal para iniciar a aplicação
+│
+├── .gitignore                
+├── CONTRIBUTING.md           
+├── pom.xml                   
+└── README.md                 
 ```
 
 ---
@@ -45,7 +62,7 @@ a definir
 
 ---
 
-## 🚀 Instalação e Execução
+## 🚀 Execução
 
 ### 1. Clone o repositório
 
@@ -53,17 +70,18 @@ a definir
 git clone https://github.com/seu-usuario/simple-banking-system.git
 cd simple-banking-system
 ```
+### 2. Execute a aplicação
 
-### 2. Compile o projeto
+1. Abra o projeto no **IntelliJ IDEA**, **Eclipse** ou **VS Code**.
+2. Localize o arquivo principal:
 
-```bash
-mvn clean compile
-```
+   ```
+   src/main/java/br/com/ufrn/Main.java
+   ```
+3. Clique com o botão direito no arquivo e selecione **Run 'Main'** (ou equivalente na sua IDE).
+4. A aplicação será iniciada e exibirá a saída no console integrado da IDE.
 
-### 3. Execute a aplicação
-```bash
-mvn exec:java -Dexec.mainClass="br.com.ufrn.Main"
-```
+
 
 ---
 
@@ -73,13 +91,18 @@ Ao iniciar o programa, você verá um menu interativo no terminal:
 
 ```
 === Sistema Bancário Simples ===
-1 - Cadastrar cliente
-2 - Criar conta
-3 - Depositar
-4 - Sacar
-5 - Transferir
-6 - Listar contas
-0 - Sair
+1. Cadastrar novo cliente
+2. Listar todos os clientes
+3. Cadastrar conta
+4. Depositar
+5. Sacar
+6. Listar todas as contas
+7. Consultar saldo
+8. Transferir entre contas
+9. Aplicar rendimento nas poupanças
+10. Relatório de consolidação
+0. Sair
+Escolha uma opção: 
 ```
 
 Basta escolher uma opção e seguir as instruções exibidas.
